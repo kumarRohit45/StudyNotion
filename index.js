@@ -13,6 +13,9 @@ const cors = require("cors");
 const {cloudinaryConnect} = require("./config/cloudinary");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
+const allowedOrigins = [
+  "https://studynotion-frontend-vkmt.vercel.app",
+];
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
@@ -22,16 +25,14 @@ database.connect();
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-    cors({
 
-        origin:[
-             "http://localhost:3000",
-             "https://studynotion-frontend-git-76c322-rohit-kumars-projects-cdee1d77.vercel.app/"
-        ],
-        credentials:true,
-    })
-)
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 app.use(
     fileUpload({
