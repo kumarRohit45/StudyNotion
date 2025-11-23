@@ -34,6 +34,8 @@ app.use(
   })
 );
 
+app.options("*", cors());
+
 app.use(
     fileUpload({
         useTempFiles:true,
